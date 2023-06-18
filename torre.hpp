@@ -39,7 +39,7 @@ namespace Moyanos
         // ok = True
         virtual void mover(const std::array<unsigned, 2> &origen,
                            const std::array<unsigned, 2> &destino,
-                           const std::vector<std::array<unsigned, 2>> &paso,
+                           std::vector<std::array<unsigned, 2>> &paso,
                            bool &ok);
 
         virtual Torre *clonar() const; // Deuelve una copia del objeto actual

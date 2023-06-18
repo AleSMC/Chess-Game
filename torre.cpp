@@ -40,6 +40,7 @@ namespace
                 ++i;
             }
         }
+        return pasos;
     }
 }
 
@@ -73,7 +74,7 @@ namespace Moyanos
     // ok = True
     void Torre::mover(const std::array<unsigned, 2> &origen,
                       const std::array<unsigned, 2> &destino,
-                      const std::vector<std::array<unsigned, 2>> &paso,
+                      std::vector<std::array<unsigned, 2>> &paso,
                       bool &ok)
     {
         // Las torres solo se pueden mover de forma recta en diagonal u horizontal
@@ -91,31 +92,39 @@ namespace Moyanos
         }
         else // La pieza se puede mover del origen al destino
         {
-            // Compruebo en que direccion se ha movido (De forma diagonal u horizontal)
+            // Compruebo en que direccion se ha movido (De forma vertical u horizontal)
             if (left)
-            {
+            { // Vertical
+
+                // El ultimo paso lo quito ya que en caso de que hubiera pieza no importaria
                 int num = num_pasos(origen[0], destino[0]) - 1;
 
                 if (num > 0)
                 {
-                    pasos(left, origen, destino, num);
+                    // La pieza va hacia arriba
+                    paso = pasos(left, origen, destino, num);
                 }
                 else if (num < 0)
                 {
-                    pasos(left, destino, origen, (num * -1));
+                    // La pieza va hacia abajo
+                    paso = pasos(left, destino, origen, (num * -1));
                 }
             }
             else // right = true , left = false
-            {
+            {    // Horizontal
+
+                // El ultimo paso lo quito ya que en caso de que hubiera pieza no importaria
                 int num = num_pasos(origen[1], destino[1]) - 1;
 
                 if (num > 0)
                 {
-                    pasos(left, origen, destino, num);
+                    // La pieza va hacia la derecha
+                    paso = pasos(left, origen, destino, num);
                 }
                 else if (num < 0)
                 {
-                    pasos(left, destino, origen, (num * -1));
+                    // La pieza va hacia la izquierda
+                    paso = pasos(left, destino, origen, (num * -1));
                 }
             }
 
