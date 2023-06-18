@@ -2,6 +2,15 @@
 
 using namespace std;
 
+namespace
+{
+    // Devuelve el numero de pasos por los que pasa
+    int num_pasos(unsigned origen, unsigned destino)
+    {
+        return (destino - origen);
+    }
+}
+
 namespace Moyanos
 {
     // Constructor de copia
@@ -35,6 +44,31 @@ namespace Moyanos
                       const std::vector<std::array<unsigned, 2>> &paso,
                       bool &ok)
     {
+        // Las torres solo se pueden mover de forma recta en diagonal u horizontal
+        // por lo que la posicion 0 (izquierda) o 1 (derecha) del origen tiene que
+        // ser igual a la del detino.
+        // En caso de ser los dos iguales no seria un movimiento valido ya que
+        // significa que la pieza no se a movido.
+
+        bool left = origen[0] == destino[0],
+             right = origen[1] == destino[1];
+
+        if (left == right || left == false || right == false)
+        {
+            ok = false;
+        }
+        else // La pieza se puede mover del origen al destino
+        {
+            // Compruebo en que direccion se ha movido (De forma diagonal u horizontal)
+            if (left)
+            {
+                int num = num_pasos(origen[0], destino[0]);
+            }
+            else // right = true
+            {
+                int num = num_pasos(origen[1], destino[1]);
+            }
+        }
     }
 
     Torre *Torre::clonar() const { return new Torre(*this); } // Deuelve una copia del objeto actual
