@@ -3,6 +3,7 @@
 
 #include "pieza.hpp"
 #include <array>
+#include <vector>
 
 namespace Moyanos
 {

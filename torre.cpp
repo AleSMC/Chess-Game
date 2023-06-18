@@ -9,6 +9,38 @@ namespace
     {
         return (destino - origen);
     }
+
+    // Devuelve los las posiciones de los pasos
+    std::vector<std::array<unsigned, 2>> pasos(bool left,
+                                               const std::array<unsigned, 2> &origen,
+                                               const std::array<unsigned, 2> &destino,
+                                               unsigned num_pasos)
+    {
+        std::vector<std::array<unsigned, 2>> pasos;
+
+        if (left)
+        {
+            unsigned i = origen[0] + 1;
+
+            while (num_pasos > 0)
+            {
+                pasos.push_back({i, origen[1]});
+                --num_pasos;
+                ++i;
+            }
+        }
+        else // right
+        {
+            unsigned i = origen[1] + 1;
+
+            while (num_pasos > 0)
+            {
+                pasos.push_back({origen[0], i});
+                --num_pasos;
+                ++i;
+            }
+        }
+    }
 }
 
 namespace Moyanos
@@ -62,12 +94,32 @@ namespace Moyanos
             // Compruebo en que direccion se ha movido (De forma diagonal u horizontal)
             if (left)
             {
-                int num = num_pasos(origen[0], destino[0]);
+                int num = num_pasos(origen[0], destino[0]) - 1;
+
+                if (num > 0)
+                {
+                    pasos(left, origen, destino, num);
+                }
+                else if (num < 0)
+                {
+                    pasos(left, destino, origen, (num * -1));
+                }
             }
-            else // right = true
+            else // right = true , left = false
             {
-                int num = num_pasos(origen[1], destino[1]);
+                int num = num_pasos(origen[1], destino[1]) - 1;
+
+                if (num > 0)
+                {
+                    pasos(left, origen, destino, num);
+                }
+                else if (num < 0)
+                {
+                    pasos(left, destino, origen, (num * -1));
+                }
             }
+
+            ok = true;
         }
     }
 
