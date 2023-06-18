@@ -4,6 +4,7 @@ Juego de ajedrez hecho completamente con c++ en el cual se usa herencia de clase
 y polimorfismo.
 
 Para ejecutar el programa test_torre.cpp:
+
   Usando makefile:
     make test_torre
     ./test_torre
