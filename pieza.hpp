@@ -12,6 +12,7 @@ namespace Moyanos
         unsigned color;
 
     protected:
+        // Constructor de copia
         Pieza(const Pieza &other);
 
     public:
