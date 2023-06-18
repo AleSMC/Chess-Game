@@ -13,7 +13,7 @@ namespace Moyanos
         Torre(const Torre &other);
 
     public:
-        // Coonstructor especifico
+        // Constructor especifico
         Torre(unsigned c);
 
         // Destructor
