@@ -13,7 +13,6 @@ namespace
     // Devuelve los las posiciones de los pasos
     std::vector<std::array<unsigned, 2>> pasos(bool left,
                                                const std::array<unsigned, 2> &origen,
-                                               const std::array<unsigned, 2> &destino,
                                                unsigned num_pasos)
     {
         std::vector<std::array<unsigned, 2>> pasos;
@@ -102,12 +101,12 @@ namespace Moyanos
                 if (num > 0)
                 {
                     // La pieza va hacia arriba
-                    paso = pasos(left, origen, destino, num);
+                    paso = pasos(left, origen, num);
                 }
                 else if (num < 0)
                 {
                     // La pieza va hacia abajo
-                    paso = pasos(left, destino, origen, (num * -1));
+                    paso = pasos(left, destino, (num * -1));
                 }
             }
             else // right = true , left = false
@@ -119,12 +118,12 @@ namespace Moyanos
                 if (num > 0)
                 {
                     // La pieza va hacia la derecha
-                    paso = pasos(left, origen, destino, num);
+                    paso = pasos(left, origen, num);
                 }
                 else if (num < 0)
                 {
                     // La pieza va hacia la izquierda
-                    paso = pasos(left, destino, origen, (num * -1));
+                    paso = pasos(left, destino, (num * -1));
                 }
             }
 
