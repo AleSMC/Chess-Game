@@ -84,7 +84,7 @@ namespace Moyanos
 
         bool left = origen[0] == destino[0];
 
-        if (left == origen[1] == destino[1])
+        if (left == (origen[1] == destino[1]))
         {
             ok = false;
         }
