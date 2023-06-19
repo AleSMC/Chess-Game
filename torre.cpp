@@ -19,22 +19,22 @@ namespace
 
         if (left)
         {
-            unsigned i = origen[0] + 1;
+            unsigned i = origen[left] + 1;
 
             while (num_pasos > 0)
             {
-                pasos.push_back({i, origen[1]});
+                pasos.push_back({origen[0], i});
                 --num_pasos;
                 ++i;
             }
         }
         else // right
         {
-            unsigned i = origen[1] + 1;
+            unsigned i = origen[left] + 1;
 
             while (num_pasos > 0)
             {
-                pasos.push_back({origen[0], i});
+                pasos.push_back({i, origen[1]});
                 --num_pasos;
                 ++i;
             }
@@ -76,16 +76,15 @@ namespace Moyanos
                       std::vector<std::array<unsigned, 2>> &paso,
                       bool &ok)
     {
-        // Las torres solo se pueden mover de forma recta en diagonal u horizontal
+        // Las torres solo se pueden mover de forma recta en verical u horizontal
         // por lo que la posicion 0 (izquierda) o 1 (derecha) del origen tiene que
         // ser igual a la del detino.
         // En caso de ser los dos iguales no seria un movimiento valido ya que
         // significa que la pieza no se a movido.
 
-        bool left = origen[0] == destino[0],
-             right = origen[1] == destino[1];
+        bool left = origen[0] == destino[0];
 
-        if (left == right)
+        if (left == origen[1] == destino[1])
         {
             ok = false;
         }
@@ -94,35 +93,37 @@ namespace Moyanos
             // Compruebo en que direccion se ha movido (De forma vertical u horizontal)
             if (left)
             { // Vertical
-
                 // El ultimo paso lo quito ya que en caso de que hubiera pieza no importaria
-                int num = num_pasos(origen[0], destino[0]) - 1;
+                int num = num_pasos(origen[1], destino[1]);
 
                 if (num > 0)
                 {
-                    // La pieza va hacia arriba
-                    paso = pasos(left, origen, num);
-                }
-                else if (num < 0)
-                {
-                    // La pieza va hacia abajo
-                    paso = pasos(left, destino, (num * -1));
-                }
-            }
-            else // right = true , left = false
-            {    // Horizontal
-
-                // El ultimo paso lo quito ya que en caso de que hubiera pieza no importaria
-                int num = num_pasos(origen[1], destino[1]) - 1;
-
-                if (num > 0)
-                {
+                    --num;
                     // La pieza va hacia la derecha
                     paso = pasos(left, origen, num);
                 }
                 else if (num < 0)
                 {
+                    ++num;
                     // La pieza va hacia la izquierda
+                    paso = pasos(left, destino, (num * -1));
+                }
+            }
+            else // right = true , left = false
+            {    // Horizontal
+                // El ultimo paso lo quito ya que en caso de que hubiera pieza no importaria
+                int num = num_pasos(origen[0], destino[0]);
+
+                if (num > 0)
+                {
+                    --num;
+                    // La pieza va hacia arriba
+                    paso = pasos(left, origen, num);
+                }
+                else if (num < 0)
+                {
+                    ++num;
+                    // La pieza va hacia abajo
                     paso = pasos(left, destino, (num * -1));
                 }
             }
