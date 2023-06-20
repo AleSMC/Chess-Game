@@ -37,6 +37,15 @@ void movimientos_correctos()
     assert(movimiento_correcto == false);
 }
 
+void clonar()
+{
+    Torre torre{1};  // Torre negra
+    Torre *Ptrtorre; // Puntero de torre
+
+    Ptrtorre = torre.clonar();
+    assert(Ptrtorre->getColor() == torre.getColor());
+}
+
 int main()
 {
     cout << "Consultando color..." << endl;
@@ -46,5 +55,10 @@ int main()
     cout << "Consultando movimientos..." << endl;
     movimientos_correctos();
     cout << "--OK" << endl;
+
+    cout << "Cunsultando clonar..." << endl;
+    clonar();
+    cout << "--OK" << endl;
+
     return 0;
 }
