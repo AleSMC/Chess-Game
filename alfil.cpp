@@ -19,6 +19,7 @@ namespace
         {
             pasos.push_back({origen[0] + i, origen[1] + i});
         }
+        return pasos;
     }
 
     // Devuelve los las posiciones de los pasos si van en esta direccion "/"
@@ -28,8 +29,9 @@ namespace
         std::vector<std::array<unsigned, 2>> pasos;
         for (unsigned i = 1; i < left; ++i)
         {
-            pasos.push_back({origen[0] + i, origen[1] + i});
+            pasos.push_back({origen[0] - i, origen[1] + i});
         }
+        return pasos;
     }
 }
 
@@ -66,8 +68,8 @@ namespace Moyanos
                       std::vector<std::array<unsigned, 2>> &paso,
                       bool &ok)
     {
-        unsigned left = num_pasos(origen[0], destino[0]),
-                 right = num_pasos(origen[1], destino[1]);
+        unsigned left = num_pasos(origen[0], destino[0]), // Lado izquierdo del array
+            right = num_pasos(origen[1], destino[1]);     // Lado derecho del array
 
         if (left != 0) // Se mueve
         {
