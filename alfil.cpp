@@ -7,7 +7,7 @@ namespace
     // Devuelve el numero de casillas por los que pasa la pieza
     int num_pasos(unsigned origen, unsigned destino)
     {
-        return destino - origen;
+        return (int(destino) - int(origen));
     }
 
     // Devuelve los las posiciones de los pasos si van en esta direccion "\"
@@ -68,8 +68,8 @@ namespace Moyanos
                       std::vector<std::array<unsigned, 2>> &paso,
                       bool &ok)
     {
-        unsigned left = num_pasos(origen[0], destino[0]), // Lado izquierdo del array
-            right = num_pasos(origen[1], destino[1]);     // Lado derecho del array
+        int left = num_pasos(origen[0], destino[0]),  // Lado izquierdo del array
+            right = num_pasos(origen[1], destino[1]); // Lado derecho del array
 
         if (left != 0) // Se mueve
         {
