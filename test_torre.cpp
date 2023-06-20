@@ -32,6 +32,9 @@ void movimientos_correctos()
     torre.mover({3, 7}, {3, 2}, pasos, movimiento_correcto);
     assert(movimiento_correcto == true);
     assert(pasos == objetivo);
+
+    torre.mover({3, 4}, {4, 5}, pasos, movimiento_correcto);
+    assert(movimiento_correcto == false);
 }
 
 int main()
@@ -41,7 +44,6 @@ int main()
     cout << "--OK" << endl;
 
     cout << "Consultando movimientos..." << endl;
-    movimientos_correctos();
     movimientos_correctos();
     cout << "--OK" << endl;
     return 0;
